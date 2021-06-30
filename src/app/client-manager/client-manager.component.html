@@ -1,0 +1,46 @@
+<div class="client-manager">
+    <h1>Add/Edit Client</h1>
+    <form [formGroup]="clientForm">
+        <div>
+        <mat-form-field appearance="fill" class="form-input">
+            <mat-label>Client ID</mat-label>
+            <input matInput formControlName="clientID">
+            <mat-error>
+                Please enter client ID
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="form-input">
+            <mat-label>Phone</mat-label>
+            <input matInput formControlName="phone">
+            <mat-error>
+                Please enter client Phone
+            </mat-error>
+          </mat-form-field>
+          </div>
+          <div>
+          <mat-form-field appearance="fill" class="form-input">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName">
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="form-input">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+           </div>
+           <div>
+           <mat-form-field appearance="fill" class="form-input">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName">
+          </mat-form-field>
+         <mat-form-field appearance="fill" class="form-input">
+            <mat-label>Description</mat-label>
+            <input matInput formControlName="description">
+          </mat-form-field>
+          </div>
+          <button mat-icon-button type="submit" color="blue" aria-label="Save name">
+         Save <mat-icon>save</mat-icon>
+    </button>
+  </form>
+</div>

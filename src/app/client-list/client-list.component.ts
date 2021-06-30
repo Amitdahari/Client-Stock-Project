@@ -10,13 +10,13 @@ interface Userchoice {
   styleUrls: ['./client-list.component.scss']
 })
 export class ClientListComponent implements OnInit {
-
+//
   userchoices: Userchoice[] = [
     {value: 'id-value', userchoiceviewValue: 'Id'},
     {value: 'phone-value', userchoiceviewValue: 'Phone'},
     
   ];
-  
+
   constructor() { }
 
   ngOnInit(): void {

@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   private destroyed$ = new Subject();
   constructor(private router:Router) {}
   ngOnInit(): void {
+    
   //  this.router.events
   //   .pipe(
   //    filter((event:RouterEvent) => event instanceof NavigationStart),

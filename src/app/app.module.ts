@@ -12,6 +12,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
+
 import { HomeComponent } from './home/home.component';
 import { ClientManagerComponent } from './client-manager/client-manager.component';
 import { ClientListComponent } from './client-list/client-list.component';
@@ -37,7 +39,8 @@ import { ClientListComponent } from './client-list/client-list.component';
     MatFormFieldModule,
     MatNativeDateModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent],

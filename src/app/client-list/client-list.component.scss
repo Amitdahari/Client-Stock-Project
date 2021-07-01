@@ -1,9 +1,32 @@
-div{
-    height: 400px;
-    width: 1000px;
+// div{
+//     height: 400px;
+//     width: 1000px;
     
-    display: flex;
+//     display: flex;
    
-    justify-content: center;
-    text-align: center;
+//     justify-content: center;
+//     text-align: center;
+//   }
+  .mat-form-field {
+    margin-right: 12px;
   }
+
+  .demo-table {
+    width: 100%;
+  }
+  
+  .mat-row .mat-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+  }
+  
+  .mat-row:hover .mat-cell {
+    border-color: currentColor;
+  }
+  .buttons{
+    display: inline-block;
+
+  }
+  
+  

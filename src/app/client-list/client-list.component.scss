@@ -11,6 +11,12 @@
     margin-right: 12px;
   }
   
+  th,td{ 
+    width: 150px; 
+    text-align: center; 
+   
+    padding: 5px;
+    }
 
   .demo-table {
     width: 100%;
@@ -30,4 +36,7 @@
 
   }
   
+  .mat-header-cell {
+    text-align: center;
+  }
   

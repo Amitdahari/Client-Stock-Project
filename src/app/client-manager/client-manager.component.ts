@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup,Validators } from '@angular/forms';
+import { UsersService } from '../services/users.service';
 @Component({
   selector: 'app-client-manager',
   templateUrl: './client-manager.component.html',
@@ -7,10 +8,14 @@ import { FormBuilder,FormGroup,Validators } from '@angular/forms';
 })
 export class ClientManagerComponent implements OnInit {
 
-  constructor(private fb:FormBuilder) { }
-  clientForm: FormGroup;
-  get form(){ return this.clientForm.controls;}
-  ngOnInit(): void {
+  clientID: string = "";
+  phone:string ="";
+  firstName:string = "";
+  lastName:string = "";
+  dateOfbirth:Date = new Date();
+  description:string = "";
+
+  constructor(private fb:FormBuilder, private userService: UsersService) {
     this.clientForm = this.fb.group({
       clientID:['',[Validators.required]],
       phone:['',[Validators.required]],
@@ -20,7 +25,23 @@ export class ClientManagerComponent implements OnInit {
       description:['']
 
     })
+   }
+  clientForm: FormGroup;
+  ngOnInit(): void {
     
+  }
+
+  save():void{
+    let user = {
+      IdKey: this.clientID,
+      Phone: this.phone,
+      FirstName: this.firstName,
+      LastName: this.lastName,
+      DateOfBirth: this.dateOfbirth
+    }
+      this.userService.addUser(user).subscribe(res =>{
+        console.log(res)
+      })
   }
 
 }

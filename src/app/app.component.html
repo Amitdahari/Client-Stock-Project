@@ -2,9 +2,9 @@
   <mat-drawer-container class="container" autosize>
     <mat-drawer #drawer class="drawer" mode="side" opened>
       <nav>
-      <button mat-button (click)="gotToHomePage()"  [class]="homeSelected ? 'selected':''">Home</button><br/>
-      <button mat-button (click)="goToClientPage()" [class]="managerSelected ? 'selected':''">Add\Edit Client</button><br/>
-      <button mat-button (click)="gotoClientSearchPage()" [class]="searchSelected ? 'selected':''">Client Search</button>  
+      <button mat-button routerLink='/home'>Home</button><br/>
+      <button mat-button routerLink='/manager'>Add\Edit Client</button><br/>
+      <button mat-button routerLink='/search'>Client Search</button>  
     </nav>
     </mat-drawer>
     <div class="main-content">

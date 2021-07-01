@@ -1,5 +1,7 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup,Validators } from '@angular/forms';
+import { UsersService } from '../services/users.service';
 
 interface Userchoice {
   value: string;
@@ -11,14 +13,9 @@ export interface PeriodicElement {
   phone: string;
   firstName: string;
   lastName: string;
-  dateOfbirth: Date;
+  dateOfbirth: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {id: '111',phone:'123',firstName:'Amit',lastName:'Dahari',dateOfbirth:new Date("01-07-2021") },
-  {id: '222',phone:'0524336841',firstName:'Ben',lastName:'Cohen',dateOfbirth:new Date("01-07-1996") },
-  {id: '333',phone:'0524113547',firstName:'Yaniv',lastName:'Tsioni',dateOfbirth:new Date("01-07-1997") },
-];
 
 @Component({
   selector: 'app-client-list',
@@ -33,16 +30,19 @@ export class ClientListComponent implements OnInit {
     
   ];
 
-  displayedColumns: string[] = ['Id', 'Phone', 'First Name', 'Last Name', 'Date of Birth'];
-  clientDataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['Id', 'IdKey', 'Phone', 'First Name', 'Last Name'];
+  clientDataSource :any
   clickedRows = new Set<PeriodicElement>();
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private usersService: UsersService) { }
   clientForm: FormGroup = new FormGroup({});
   ngOnInit(): void {
     this.clientForm = this.fb.group({
       searchTerm:['',[Validators.required]],
       searchKeywords:['']
+    })
+    this.usersService.getUsers().subscribe(res=>{
+      this.clientDataSource = res;
     })
   }
 

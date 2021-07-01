@@ -5,7 +5,7 @@ import { ClientManagerComponent } from './client-manager/client-manager.componen
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [{
-  path:'',component:HomeComponent},
+  path:'home',component:HomeComponent},
  {path:'manager', component:ClientManagerComponent},
  {path:'search',component:ClientListComponent}
 ];

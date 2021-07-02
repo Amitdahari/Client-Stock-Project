@@ -22,10 +22,7 @@
               cdkAutosizeMaxRows="5"></textarea>
   </mat-form-field>
 </div>
-@if(clientDataSource == null){
-  <mat-spinner></mat-spinner>
 
-}
   <table mat-table [dataSource]="clientDataSource" class="mat-elevation-z8 demo-table">
     <!-- Id Column -->
     <ng-container matColumnDef="Id">

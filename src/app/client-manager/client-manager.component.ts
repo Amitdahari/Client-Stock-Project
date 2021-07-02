@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup,Validators } from '@angular/forms';
 import { UsersService } from '../services/users.service';
+import { User } from '../models/User';
 @Component({
   selector: 'app-client-manager',
   templateUrl: './client-manager.component.html',
@@ -39,6 +40,16 @@ export class ClientManagerComponent implements OnInit {
       LastName: this.lastName,
       DateOfBirth: this.dateOfbirth
     }
+    
+
+    const newUser:User = {
+      IdKey: this.clientID,
+      Phone: this.phone,
+      FirstName: this.firstName,
+      LastName: this.lastName,
+      DateOfBirth: this.dateOfbirth,
+      Description: this.description
+}
       this.userService.addUser(user).subscribe(res =>{
         console.log(res)
       })

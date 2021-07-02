@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { ClientManagerComponent } from './client-manager/client-manager.component';
 import { ClientListComponent } from './client-list/client-list.component';
+import { EditClientComponent } from './edit-client/edit-client.component';
 
 
 
@@ -27,7 +28,8 @@ import { ClientListComponent } from './client-list/client-list.component';
     AppComponent,
     HomeComponent,
     ClientManagerComponent,
-    ClientListComponent
+    ClientListComponent,
+    EditClientComponent
   ],
   imports: [
     BrowserModule,

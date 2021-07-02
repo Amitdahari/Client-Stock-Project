@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  data:any 
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.http.get('/assets/config.json')
+    .toPromise().then(data=>{
+      this.data = data
+      debugger
+    })
   }
 
 }

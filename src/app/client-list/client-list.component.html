@@ -5,8 +5,8 @@
 <div class="buttons">
 <mat-form-field appearance="fill">
   <mat-label>Identificator</mat-label>
-  <mat-select>
-    <mat-option *ngFor="let userchoice of userchoices" [value]="userchoice.value">
+  <mat-select [(value)]="defaultOption" (selectionChange)="changeClient($event.value)">
+    <mat-option *ngFor="let userchoice of userchoices" [value]="userchoice.value" >
       {{userchoice.userchoiceviewValue}}
     </mat-option>
   </mat-select>
@@ -15,13 +15,16 @@
 <br/>
 <mat-form-field appearance="fill">
     <mat-label>Search term</mat-label>
-    <textarea matInput
+    <textarea [(ngModel)]="search" matInput
               cdkTextareaAutosize
               #autosize="cdkTextareaAutosize"
               cdkAutosizeMinRows="1"
               cdkAutosizeMaxRows="5"></textarea>
   </mat-form-field>
-</div>
+  
+  <button (click)="searchButtonClick()" class="searchButton"  mat-icon-button>Search</button>
+  <mat-label style="color: red;">{{error}}</mat-label>
+</div>  
 
   <table mat-table [dataSource]="clientDataSource" class="mat-elevation-z8 demo-table">
     <!-- Id Column -->
@@ -58,8 +61,7 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr
         mat-row
-        (click)="clickedRows.add(row)"
-        [class.demo-row-is-clicked]="clickedRows.has(row)"
+        (click)="edit(row)"
         *matRowDef="let row; columns: displayedColumns;"
     ></tr>
   </table>

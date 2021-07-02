@@ -1,11 +1,14 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup,Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { User } from '../models/User';
 import { UsersService } from '../services/users.service';
 
 interface Userchoice {
   value: string;
   userchoiceviewValue: string;
+  selected: boolean;
 }
 
 export interface PeriodicElement {
@@ -25,16 +28,19 @@ export interface PeriodicElement {
 export class ClientListComponent implements OnInit {
 
   userchoices: Userchoice[] = [
-    {value: 'id-value', userchoiceviewValue: 'Id'},
-    {value: 'phone-value', userchoiceviewValue: 'Phone'},
+    {value: 'id-value', userchoiceviewValue: 'Id', selected:true},
+    {value: 'phone-value', userchoiceviewValue: 'Phone', selected:false},
     
   ];
 
+  defaultOption: string = "id-value"
   displayedColumns: string[] = ['Id', 'IdKey', 'Phone', 'First Name', 'Last Name'];
   clientDataSource :any
-  clickedRows = new Set<PeriodicElement>();
+  search:string ="";
+  searchOption: number=0;
+  error:any;
 
-  constructor(private fb: FormBuilder, private usersService: UsersService) { }
+  constructor(private fb: FormBuilder, private usersService: UsersService, private navigate: Router) { }
   clientForm: FormGroup = new FormGroup({});
   ngOnInit(): void {
     this.clientForm = this.fb.group({
@@ -44,6 +50,71 @@ export class ClientListComponent implements OnInit {
     this.usersService.getUsers().subscribe(res=>{
       this.clientDataSource = res;
     })
+  }
+
+  edit(row: any){
+    debugger
+     this.navigate.navigate(['/edit'],{state: {user: row}})
+  }
+
+  searchButtonClick(){
+    this.error ="";
+    switch(this.searchOption){
+      case 0: {
+        this.usersService.getUserbyId(this.search).subscribe(res =>{
+          this.clientDataSource = res
+          debugger
+        }
+          , err =>{
+            debugger
+            this.error = err.statusText
+            this.clientDataSource=[]
+          } )
+          break;
+      }
+      case 1: {
+        this.usersService.getUserbyPhone(this.search).subscribe(res =>{
+      
+          this.clientDataSource = res
+          debugger
+        },
+           err =>{
+            debugger
+            this.error = err.statusText
+            this.clientDataSource=[]
+          }
+          );
+          break;
+      }
+      default : {
+        this.usersService.getUsers().subscribe(res=>{
+          this.clientDataSource = res;
+        },
+         err =>{
+          debugger
+          this.error = err.statusText
+          this.clientDataSource=[]
+        })
+        break;
+      }
+      
+    }
+  }
+
+  changeClient(value:string){
+    switch(value){
+      case "id-value":
+        { this.searchOption = 0;
+         break;
+        }
+      case "phone-value":{
+        this.searchOption =1;
+         break;
+      } 
+      default:  this.searchOption =0;
+      break;
+    }
+debugger
   }
 
 }

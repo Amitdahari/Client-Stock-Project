@@ -1,3 +1,5 @@
 {
-    "titleHomePage":"Welcome to Clients Stock"
+    "titleHomePage":"Welcome to Clients Stock",
+    "titleEditPage": "Edit/Add Page",
+    "titleSearchPage":"Search Client"
 }

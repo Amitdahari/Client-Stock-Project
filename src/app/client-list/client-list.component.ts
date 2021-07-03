@@ -4,6 +4,7 @@ import { FormBuilder,FormGroup,Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from '../models/User';
 import { UsersService } from '../services/users.service';
+import { HttpClient } from '@angular/common/http';
 
 interface Userchoice {
   value: string;
@@ -39,10 +40,17 @@ export class ClientListComponent implements OnInit {
   search:string ="";
   searchOption: number=0;
   error:any;
-
-  constructor(private fb: FormBuilder, private usersService: UsersService, private navigate: Router) { }
+  data:any;
+  constructor(private fb: FormBuilder, private usersService: UsersService, private navigate: Router, private http: HttpClient) { }
   clientForm: FormGroup = new FormGroup({});
   ngOnInit(): void {
+    //Getting title from json
+    this.http.get('/assets/config.json')
+    .toPromise().then(data =>{
+      this.data = data
+      debugger
+    })
+
     this.clientForm = this.fb.group({
       searchTerm:['',[Validators.required]],
       searchKeywords:['']

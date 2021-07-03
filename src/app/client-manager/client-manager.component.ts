@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../services/users.service';
 import { User } from '../models/User';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-client-manager',
   templateUrl: './client-manager.component.html',
@@ -16,9 +17,11 @@ export class ClientManagerComponent implements OnInit {
   lastName: string = "";
   dateOfbirth: Date = new Date();
   description: string = "";
+ 
 
+  data:any;
 
-  constructor(private fb: FormBuilder, private userService: UsersService, private router: Router) {
+  constructor(private fb: FormBuilder, private userService: UsersService, private router: Router, private http: HttpClient) {
     this.clientForm = this.fb.group({
       clientID: ['', [Validators.required]],
       phone: ['', [Validators.required]],
@@ -31,9 +34,14 @@ export class ClientManagerComponent implements OnInit {
 
 
   }
+  
   clientForm: FormGroup;
   ngOnInit(): void {
-
+    this.http.get('/assets/config.json')
+    .toPromise().then(data => {
+      this.data = data
+      debugger
+    })
   }
 
   save(): void {
@@ -43,6 +51,7 @@ export class ClientManagerComponent implements OnInit {
     user.FirstName = this.firstName;
     user.LastName = this.lastName;
     user.DateOfBirth = this.dateOfbirth;
+    //user.Description = this.description;
     this.userService.addUser(user).subscribe(res => {
       console.log(res)
     })

@@ -18,6 +18,7 @@ export interface PeriodicElement {
   firstName: string;
   lastName: string;
   dateOfbirth: string;
+  
 }
 
 
@@ -35,7 +36,7 @@ export class ClientListComponent implements OnInit {
   ];
 
   defaultOption: string = "id-value"
-  displayedColumns: string[] = ['Id', 'IdKey', 'Phone', 'First Name', 'Last Name'];
+  displayedColumns: string[] = [ 'Id', 'Phone', 'First Name', 'Last Name'];
   clientDataSource :any
   search:string ="";
   searchOption: number=0;
@@ -48,7 +49,7 @@ export class ClientListComponent implements OnInit {
     this.http.get('/assets/config.json')
     .toPromise().then(data =>{
       this.data = data
-      debugger
+      
     })
 
     this.clientForm = this.fb.group({
@@ -61,7 +62,7 @@ export class ClientListComponent implements OnInit {
   }
 
   edit(row: any){
-    debugger
+    
      this.navigate.navigate(['/edit'],{state: {user: row}})
   }
 
@@ -71,10 +72,10 @@ export class ClientListComponent implements OnInit {
       case 0: {
         this.usersService.getUserbyId(this.search).subscribe(res =>{
           this.clientDataSource = res
-          debugger
+          
         }
           , err =>{
-            debugger
+            
             this.error = err.statusText
             this.clientDataSource=[]
           } )
@@ -84,10 +85,10 @@ export class ClientListComponent implements OnInit {
         this.usersService.getUserbyPhone(this.search).subscribe(res =>{
       
           this.clientDataSource = res
-          debugger
+          
         },
            err =>{
-            debugger
+            
             this.error = err.statusText
             this.clientDataSource=[]
           }
@@ -99,7 +100,7 @@ export class ClientListComponent implements OnInit {
           this.clientDataSource = res;
         },
          err =>{
-          debugger
+          
           this.error = err.statusText
           this.clientDataSource=[]
         })
@@ -122,7 +123,7 @@ export class ClientListComponent implements OnInit {
       default:  this.searchOption =0;
       break;
     }
-debugger
+
   }
 
 }

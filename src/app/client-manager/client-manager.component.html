@@ -39,8 +39,10 @@
             <input matInput [(ngModel)]='description' formControlName="description">
           </mat-form-field>
           </div>
-          <button mat-icon-button type="submit" (click) = save() color="blue" aria-label="Save name">
+          <button mat-icon-button [disabled]="clientForm.invalid" type="submit" (click) = save() color="blue" aria-label="Save name">
          Save <mat-icon>save</mat-icon>
-    </button>
+    </button><br/>
+    <mat-label style="color: rgb(33, 107, 51);">{{response}}</mat-label>
+   
   </form>
 </div>

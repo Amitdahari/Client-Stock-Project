@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
     this.http.get('/assets/config.json')
     .toPromise().then(data=>{
       this.data = data
-      debugger
+      
     })
   }
 

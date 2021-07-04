@@ -12,40 +12,98 @@ import { UsersService } from '../services/users.service';
 export class EditClientComponent implements OnInit {
 
   clientID: string = "";
-  phone:string ="";
-  firstName:string = "";
-  lastName:string = "";
-  dateOfbirth:Date = new Date();
-  description:string = "";
+  phone: string = "";
+  firstName: string = "";
+  lastName: string = "";
+  dateOfbirth: Date = new Date();
+  description: string = "";
 
   clientForm: FormGroup;
-  user:any//todo
+  user: any//todo
+  error: any;
+  response: string = "";
 
-  constructor(private fb:FormBuilder, private userService: UsersService, private router: Router) { 
+  constructor(private fb: FormBuilder, private userService: UsersService, private router: Router) {
     this.clientForm = this.fb.group({
-      clientID:['client',[Validators.required]],
-      phone:['',[Validators.required]],
-      firstName:[''],
-      lastName:[''],
-      dateOfBirth:[''],
-      description:['']
+      clientID: ['client', [Validators.required]],
+      phone: ['', [Validators.required]],
+      firstName: [''],
+      lastName: [''],
+      dateOfBirth: [''],
+      description: ['']
     });
     this.user = this.router.getCurrentNavigation()?.extras.state?.user;
-      this.clientID = this.user.idKey;
-      this.phone = this.user.phone;
-      this.firstName = this.user.firstName;
-      this.lastName = this.user.lastName;
-      this.dateOfbirth = this.user.dateOfBirth;
-      this.description = this.user.description;
-      debugger
-   }
-  
-  ngOnInit(): void {
-      
+    this.clientID = this.user.idKey;
+    this.phone = this.user.phone;
+    this.firstName = this.user.firstName;
+    this.lastName = this.user.lastName;
+    this.dateOfbirth = this.user.dateOfBirth;
+    this.description = this.user.description;
+    
   }
 
-  save():void{
-    debugger
+  ngOnInit(): void {
+
+  }
+
+  save(): void {
+    var user = new User();
+    user.IdKey = this.clientID;
+    user.Phone = this.phone;
+    user.DateOfBirth = this.dateOfbirth;
+    user.FirstName = this.firstName;
+    user.LastName = this.lastName;
+    user.Description = this.description;
+
+    this.userService.updateUser(user).subscribe(res => {
+      this.response = "User has been updated!";
+    }
+      , err => {
+        
+        this.response = err.statusText
+      })
+
+  }
+
+  phoneChanged: string = ''
+  dateOfBirthChanged: string = ''
+  firstNameChanged: string = ''
+  lastNameChanged: string = ''
+  descriptionChanged: string = ''
+
+  isChangePhone() {
+    if (this.user.phone != this.phone)
+      this.phoneChanged = '*';
+    else
+      this.phoneChanged = ''
+  }
+  isChangeDateOfbirth() {
+    
+    if (this.user.dateOfBirth != this.dateOfbirth)
+    {
+    
+      this.dateOfBirthChanged = '*';
+    }
+    else
+      this.dateOfBirthChanged = ''
+  }
+  isChangeFirstName() {
+    if (this.user.firstName != this.firstName)
+      this.firstNameChanged = '*';
+    else
+      this.firstNameChanged = ''
+  }
+  isChangeLastName() {
+    if (this.user.lastName != this.lastName)
+      this.lastNameChanged = '*';
+    else
+      this.lastNameChanged = ''
+  }
+  isChangeDescription() {
+    if (this.user.description != this.description)
+      this.descriptionChanged = '*';
+    else
+      this.descriptionChanged = ''
   }
 
 }

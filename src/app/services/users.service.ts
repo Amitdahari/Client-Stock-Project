@@ -36,4 +36,8 @@ export class UsersService {
   getUserbyPhone(phone:string): Observable<any>{  
     return this.httpClient.get(`http://localhost:57056/api/users/getUsersbyPhone/${phone}`).pipe(catchError(this.handleError('error')));
   }
+
+  updateUser(user: User): Observable<any>{
+    return this.httpClient.put(`http://localhost:57056/api/users/updateUser/${user.IdKey}`, user).pipe(catchError(this.handleError('error')));
+  }
 }

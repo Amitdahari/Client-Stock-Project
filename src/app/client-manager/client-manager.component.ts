@@ -17,6 +17,8 @@ export class ClientManagerComponent implements OnInit {
   lastName: string = "";
   dateOfbirth: Date = new Date();
   description: string = "";
+
+  response: string = "";
  
 
   data:any;
@@ -40,7 +42,7 @@ export class ClientManagerComponent implements OnInit {
     this.http.get('/assets/config.json')
     .toPromise().then(data => {
       this.data = data
-      debugger
+      
     })
   }
 
@@ -51,9 +53,9 @@ export class ClientManagerComponent implements OnInit {
     user.FirstName = this.firstName;
     user.LastName = this.lastName;
     user.DateOfBirth = this.dateOfbirth;
-    //user.Description = this.description;
+    user.Description = this.description;
     this.userService.addUser(user).subscribe(res => {
-      console.log(res)
+      this.response = "User has been Created!";
     })
   }
 
